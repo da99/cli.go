@@ -14,6 +14,7 @@ func Fail() {
 	fmt.Printf("!!! Unknown arguments: %v\n", ARGS_STRING)
 	os.Exit(1)
 }
+
 func IsMatch(cmd string, x int) bool {
 	if strings.Contains(ARGS_STRING, cmd) {
 		pieces := strings.Split(cmd, " ")
