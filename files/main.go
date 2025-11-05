@@ -3,9 +3,9 @@ package files
 
 import (
 	"os"
-	"os/exec"
-	"bytes"
-	"bufio"
+	// "os/exec"
+	// "bytes"
+	// "bufio"
 	"github.com/da99/cli.go/run"
 	// "path/filepath"
 	// "strings"
