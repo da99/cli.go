@@ -11,7 +11,7 @@ import (
 )
 
 
-func Lines(cmd_str string) []string {
+func One_Line_Script(cmd_str string) []string {
 	raw := exec.Command("sh", "-c", cmd_str)
 
 	output, o_err := raw.Output()
