@@ -17,7 +17,6 @@ func must_exist(str_path string) bool {
 
 func Get_Config_Bytes(raw_files ...string) ([]byte, error) {
 	file_path := files.First(raw_files...)
-	fmt.Printf("CONFIG: %v\n", file_path)
 	if file_path == "" {
 		return nil, nil
 	}
