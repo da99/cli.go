@@ -3,12 +3,7 @@ package files
 
 import (
 	"os"
-	// "os/exec"
-	// "bytes"
-	// "bufio"
 	"github.com/da99/cli.go/run"
-	// "path/filepath"
-	// "strings"
 )
 
 // Returns true if the argument exists on the filesystem.
@@ -17,13 +12,13 @@ func Is(file_path string) bool {
 	return err == nil
 }
 
+// Returns first file that exists and has read access.
+//   It takes a shortcut using os.Stat with no error,
+//   instead of actually checking read access.
 func First(f ...string) string {
 	for _, fp := range f {
 		_, err := os.Stat(fp);
-		if err != nil {
-			return ""
-		}
-		return fp
+		if err == nil { return fp }
 	}
 	return ""
 }
