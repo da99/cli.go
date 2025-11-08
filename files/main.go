@@ -3,6 +3,7 @@ package files
 
 import (
 	"os"
+	"path/filepath"
 	"github.com/da99/cli.go/run"
 )
 
@@ -37,4 +38,12 @@ func List_Shallow_Files_Ext(file_path string, ext string) []string {
 // Returns a string slice of directory paths, 1 level deep, ignoring . directories.
 func List_Shallow_Dirs(file_path string) []string {
 	return run.Cmd_Args("find", file_path, "-mindepth", "1", "-maxdepth", "1", "-type", "d", "-not", "-name", ".*")
+}
+
+func Clean_Paths(paths ...string) []string {
+	var new_paths []string
+	for _, x := range paths {
+		new_paths = append(new_paths, filepath.Clean(x))
+	}
+	return new_paths
 }

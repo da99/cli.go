@@ -19,6 +19,17 @@ func One_Line_Script(cmd_str string) []string {
 	return strings.Split(strings.TrimSpace(string(output)), "\n")
 }
 
+func Std(cmd string, args ...string) {
+	proc := exec.Command(cmd, args...)
+	proc.Stdout = os.Stdout
+	proc.Stderr = os.Stderr
+
+	err := proc.Run()
+	if err != nil {
+		exit.Print_Msg(err, "Command: ", cmd, args)
+	}
+}
+
 // Returns a string slice of output from a command executed via exec.Command.
 func Cmd_Args(cmd string, args ...string) []string {
 	os_cmd := exec.Command(cmd, args...)
