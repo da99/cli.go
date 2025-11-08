@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"errors"
 	"encoding/json"
 	"github.com/da99/cli.go/files"
 )
@@ -15,20 +16,20 @@ func must_exist(str_path string) bool {
 	return true
 }
 
-func Get_Config_Bytes(raw_files ...string) ([]byte, error) {
-	file_path := files.First(raw_files...)
+func Get_Config_Bytes(possible_files ...string) ([]byte, error) {
+	file_path := files.First(possible_files...)
 	if file_path == "" {
-		return nil, nil
+		return nil, fmt.Errorf("Files could not be opened: %v", possible_files)
 	}
 	contents, read_err := os.ReadFile(file_path)
-	if read_err != nil { return nil, read_err }
+	if read_err != nil { return nil, errors.Join(fmt.Errorf("Opening file: %v", file_path), read_err) }
 	return contents, nil
 }
 
-func Get_Config() (map[string]interface{}, error) {
+func Get_Config(possible_files ...string) (map[string]interface{}, error) {
 	fin := make(map[string]interface{})
 
-	contents, config_err := Get_Config_Bytes("config.json", "config/main.json")
+	contents, config_err := Get_Config_Bytes(possible_files...)
 	if config_err != nil {
 		return fin, config_err
 	}
